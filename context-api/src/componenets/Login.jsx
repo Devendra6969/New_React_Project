@@ -14,7 +14,7 @@ function Login() {
     };
 
   return (
-    <div className='flex justify-center items-center h-screen'>
+    <div className='flex justify-center items-center h-100'>
       <div className="border-2 w-100">
         <h2 className="bg-green-400 p-4 my-auto">Login</h2>
         <input

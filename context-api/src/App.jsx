@@ -9,11 +9,16 @@ function App() {
 
 
   return (
-      <UserContextProvider>
-        <h2>Login Now</h2>
-          <Login />
-          <Profile />
-      </UserContextProvider>
+    <UserContextProvider>
+      <h2>
+        <strong className='text-blue-500 text-center '>Login Now</strong>
+      </h2>
+      <Login />
+      <div className='h-20 w-25 ml-90 rounded-4xl text-center text-blue-500 bg-green-300 p-3'>
+      <Profile />
+
+      </div>
+    </UserContextProvider>
   );
 }
 
