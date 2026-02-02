@@ -1,17 +1,19 @@
+import React from "react";
+
 export default function Card() {
+
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <a href="/">
         <img
           className="p-8 rounded-t-lg"
-          src="https://images.pexels.com/photos/18264716/pexels-photo-18264716/free-photo-of-man-people-laptop-internet.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          alt="product_image1"
+          src="https://images.unsplash.com/photo-1640894822819-0a94bec464bf?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c2tldGNofGVufDB8fDB8fHww"
         />
       </a>
       <div className="px-5 pb-5">
         <a href="/">
           <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-            Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport
+            Lorem ipsum dolor sit amet.
           </h5>
         </a>
         <div className="flex items-center mt-2.5 mb-5">
