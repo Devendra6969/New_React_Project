@@ -1,23 +1,31 @@
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import TodoContext from "./contexts/TodoContext";
+import Test from "./pages/Test";
+
+const [todos, setTodos] = useState([]);  
 
 
-
-addTodo = () => {
+const addTodo = (todo) => {
+  
   
 }
 
+const toggleTodo = () => {
+
+}
+
+const updateTodo = () => {
+
+}
 
 function App() {
   return (
     <>
-      <TodoContext value={{  todos, addTodo, toggleTodo, updateTodo }}>
         <div className="min-h-screen w-full relative bg-horizon text-white">
           <Navbar />
           <Home />
         </div>
-      </TodoContext>
     </>
   );
 }
