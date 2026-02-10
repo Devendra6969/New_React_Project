@@ -1,51 +1,72 @@
-import React, { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import TodoContext from "@/contexts/TodoContext";
-
+import React, { useEffect, useState } from "react";
+import { TodoContext } from "@/contexts"; // Ensure this path is correct
+import InputForm from "./InputForm";
+import TodoItem from "./TodoItem";
 
 function Home() {
-
   const [todos, setTodos] = useState([]);
 
-
-
-  const[task, setTask] = useState("")
-
-    const addTask = () => {
-        console.log("Task added", task);
-        setTodos("")
-        
+  // 1. Loading Todos (You already had this)
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem("todos"));
+    if (todos && todos.length) {
+      setTodos(todos);
     }
+  }, []);
+
+  // 2. NEW: Saving Todos to Local Storage whenever they change
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = (todo) => {
-    setTodos((prev) => [...prev, {id: crypto.randomUUID(), ...todo}])
-
-  }  
+    // You are generating IDs here, which is good
+    setTodos((prev) => [...prev, { id: crypto.randomUUID(), ...todo }]);
+  };
 
   const updateTodo = (id, todo) => {
-    setTodos((prev) => prev.map((prevTodo) => (prevTodo.id)=== id ? todo : prevTodo))
+    setTodos((prev) =>
+      prev.map((prevTodo) => (prevTodo.id === id ? todo : prevTodo)),
+    );
+  };
 
-  }
-  
+  const deleteTodo = (id) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  };
+
+  const toggleTodo = (id) => {
+    setTodos((prev) =>
+      prev.map((prevTodo) =>
+        prevTodo.id === id
+          ? { ...prevTodo, completed: !prevTodo.completed }
+          : prevTodo,
+      ),
+    );
+  };
 
   return (
-    <TodoContext value={{ todos, addTodo, toggleTodo, updateTodo }}>
-
-      <div className="my-4 flex items-center">
-        <Input
-          className="w-[45%]"
-          placeholder="Enter text"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
-          
-        />
-
-        <Button variant="outline" className="mx-4" onClick={addTask}>
-          ADD
-        </Button>
+    // FIX A: Use .Provider
+    <TodoContext
+      value={{ todos, addTodo, toggleTodo, updateTodo, deleteTodo }}
+    >
+      <div className="min-h-screen py-8">
+        <div className="w-full max-w-2xl mx-auto shadow-md rounded-lg px-4 py-3 text-white">
+          <h1 className="text-2xl font-bold text-center mb-8 mt-2">
+            Manage Your Todos
+          </h1>
+          <div className="mb-4">
+            <InputForm />
+          </div>
+          <div className="flex flex-wrap gap-y-3">
+            {/* FIX B: Loop through the todos state */}
+            {todos.map((todo) => (
+              <div key={todo.id} className="w-full">
+                <TodoItem todo={todo} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-
     </TodoContext>
   );
 }
